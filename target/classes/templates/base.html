@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Библиотека</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body th:fragment="layout(content)">
+  <header class="container">
+    <h1><a th:href="@{/books}">Библиотека</a></h1>
+    <nav>
+      <a th:href="@{/books}">Список книг</a>
+      <a th:href="@{/books/new}" class="button">Добавить</a>
+    </nav>
+    <div th:if="${success}" class="alert success" th:text="${success}"></div>
+  </header>
+
+  <main class="container" th:insert="${content}"></main>
+</body>
+</html>

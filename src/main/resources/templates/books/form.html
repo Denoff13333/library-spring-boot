@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<body th:replace="~{base :: layout(~{::section})}">
+<section>
+    <h2 th:text="${title}">Форма</h2>
+    <form th:action="${book.id} != null ? @{/books/{id}(id=${book.id})} : @{/books}"
+          method="post" th:object="${book}">
+        <div class="field">
+            <label for="title">Название *</label>
+            <input id="title" type="text" th:field="*{title}" placeholder="Например, Мастер и Маргарита">
+            <div class="error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+        </div>
+        <div class="field">
+            <label for="author">Автор *</label>
+            <input id="author" type="text" th:field="*{author}" placeholder="Автор">
+            <div class="error" th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></div>
+        </div>
+        <div class="field">
+            <label for="publishYear">Год *</label>
+            <input id="publishYear" type="number" min="1" th:field="*{publishYear}" placeholder="2020">
+            <div class="error" th:if="${#fields.hasErrors('publishYear')}" th:errors="*{publishYear}"></div>
+        </div>
+        <div class="buttons">
+            <button type="submit">Сохранить</button>
+            <a th:href="@{/books}" class="button ghost">Отмена</a>
+        </div>
+    </form>
+</section>
+</body>
+</html>

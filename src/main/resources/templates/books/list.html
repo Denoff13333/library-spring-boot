@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org"><body th:replace="~{base :: layout(~{::section})}">
+<section>
+<form method="get" th:action="@{/books}" class="search-form">
+<input type="text" name="q" placeholder="Поиск по названию..." th:value="${q}"/>
+<button type="submit">Найти</button><a th:href="@{/books}" class="button ghost">Сбросить</a>
+</form></section>
+<section><table><thead><tr><th>ID</th><th>Название</th><th>Автор</th><th>Год</th><th></th></tr></thead>
+<tbody>
+<tr th:each="b : ${books}">
+<td th:text="${b.id}">1</td>
+<td th:text="${b.title}">Название</td>
+<td th:text="${b.author}">Автор</td>
+<td th:text="${b.publishYear}">2000</td>
+<td class="actions">
+<a th:href="@{'/books/' + ${b.id} + '/edit'}">Редактировать</a>
+<form th:action="@{'/books/' + ${b.id} + '/delete'}" method="post" onsubmit="return confirm('Удалить книгу?')">
+<button type="submit" class="danger">Удалить</button></form></td></tr>
+<tr th:if="${#lists.isEmpty(books)}"><td colspan="5" class="muted">Ничего не найдено</td></tr>
+</tbody></table></section>
+</body></html>
